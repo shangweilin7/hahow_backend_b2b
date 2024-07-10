@@ -40,6 +40,7 @@ gem 'bootsnap', '~> 1.18.3', require: false
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'debug', '~> 1.9.2', platforms: %i[ mri windows ]
+  gem 'rspec-rails', '~> 6.1.3'
 end
 
 group :development do
