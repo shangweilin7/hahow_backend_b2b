@@ -40,7 +40,13 @@ gem 'bootsnap', '~> 1.18.3', require: false
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'debug', '~> 1.9.2', platforms: %i[ mri windows ]
+  gem 'factory_bot_rails', '~> 6.4.3'
   gem 'rspec-rails', '~> 6.1.3'
+end
+
+group :test do
+  gem 'database_cleaner-active_record', '~> 2.2.0'
+  gem 'shoulda-matchers', '~> 6.2.0'
 end
 
 group :development do

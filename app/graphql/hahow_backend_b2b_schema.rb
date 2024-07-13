@@ -7,6 +7,17 @@ class HahowBackendB2bSchema < GraphQL::Schema
   # For batch-loading (see https://graphql-ruby.org/dataloader/overview.html)
   use GraphQL::Dataloader
 
+  rescue_from(ActiveRecord::RecordNotFound) do |_err, _obj, _args, _ctx, _field|
+    GraphQL::ExecutionError.new('Record not found', extensions: { status: 404 })
+  end
+
+  rescue_from(ActiveRecord::RecordInvalid) do |err|
+    GraphQL::ExecutionError.new(
+      err.record.errors.full_messages.join(', '),
+      extensions: { status: 422 }
+    )
+  end
+
   # GraphQL-Ruby calls this when something goes wrong while running a query:
   def self.type_error(err, context)
     # if err.is_a?(GraphQL::InvalidNullError)
