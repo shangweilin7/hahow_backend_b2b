@@ -1,0 +1,22 @@
+version: '3.9'
+services:
+  db:
+    image: postgres:16.3
+    volumes:
+      - ./tmp/db:/var/lib/postgresql/data
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_USER: 'postgres'
+      POSTGRES_PASSWORD: 'password'
+  web:
+    build:
+      context: .
+    volumes:
+      - .:/app
+    ports:
+      - '3000:3000'
+    depends_on:
+      - db
+    environment:
+      SECRET_KEY_BASE: 2be1711a9ee23d3023413a6145414952525e2fe89fe444f43930233dc4b10f047a0872c3455336fa78475e25a96ffd37844709f334fd6f830ad6777dccb6a775
